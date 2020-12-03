@@ -14,7 +14,7 @@ module textGet
 #include <math.h>
 #include "ldata.h"     /* Main UPI header. */
 
-#define PI		3.14159265358979323846
+#define PI		3.14159265358979323846 //ä¸€äº›å‚æ•°
 #define SIZE		1
 #define NUM_WG_POINTS	5
 #define LEN_TEXT_WID	5
@@ -22,35 +22,35 @@ module textGet
 #define POS_TEXT_X_STA	-1000
 #define POS_TEXT_Y_CEN	200
 
-#define NUM  56 //»®·ÖµÄ·İÊı
+#define NUM  56 //åˆ’åˆ†çš„ä»½æ•°
 
-   //ÍÖÔ²   1
-  	void drawC_1( LCell Cell, LLayer Layer,  double offsetX, double offsetY )
+   //æ¤­åœ†   1
+  	void drawC_1( LCell Cell, LLayer Layer,  double offsetX, double offsetY )//ç”»å›¾å‡½æ•°
 	{
-	    int i=0;
-		int	cnt	= NUM;//»®·ÖµÄ·İÊı
-		float x[NUM],y[NUM];
-		float c= 400;//µ¥Î»nm £¬¿ÉÒÔÍ¨¹ıSIZEµ÷Õûµ¥Î»
-		float b= 300;
-		float a= sqrt(c*c+b*b);
-		float e= c/a;
-		float p= a*a/c-c;
-		
-		
-		for ( i = 0; i < cnt ; i++ )
-		{
-			float tho = e*p/(1-e*cos(2*PI*i/NUM));//¼«×ø±êÍÖÔ²·½³Ì
-			
-			x[i]= tho*cos(2*PI*i/NUM);//¼«×ø±ê×ª»»ÎªÆÕÍ¨×ø±ê
-			y[i]= tho*sin(2*PI*i/NUM);
-		}
-		
+		int i=0;
+		int	cnt	= NUM;//åˆ’åˆ†çš„ä»½æ•°
+	float x[NUM],y[NUM];
+	float c= 400;//å•ä½nm ï¼Œå¯ä»¥é€šè¿‡SIZEè°ƒæ•´å•ä½
+	float b= 300;
+	float a= sqrt(c*c+b*b);
+	float e= c/a;
+	float p= a*a/c-c;
+	
 
-        LPoint	*points;
+	for ( i = 0; i < cnt ; i++ )//åæ ‡è½¬æ¢
+	{
+		float tho = e*p/(1-e*cos(2*PI*i/NUM));//æåæ ‡æ¤­åœ†æ–¹ç¨‹
+
+		x[i]= tho*cos(2*PI*i/NUM);//æåæ ‡è½¬æ¢ä¸ºæ™®é€šåæ ‡
+		y[i]= tho*sin(2*PI*i/NUM);
+	}
+
+
+        LPoint	*points; //æŸç§ç‰¹æ®Šçš„æŒ‡é’ˆ
 		points = (LPoint *) malloc( (cnt) * sizeof(LPoint) );//get arm
 		for ( i = 0; i < cnt ; i++ )
 		{
-			points[i] = LPoint_Set( x[i] * SIZE + offsetX, y[i] * SIZE + offsetY );//Ledit»­µã
+			points[i] = LPoint_Set( x[i] * SIZE + offsetX, y[i] * SIZE + offsetY );//Leditç”»ç‚¹
 		}
 		LPolygon_New( Cell, Layer, points, cnt  );
 		free( points );
@@ -62,16 +62,16 @@ module textGet
 	void drawC_2( LCell Cell, LLayer Layer,  double offsetX, double offsetY )
 	{
 	    int i=0;
-		int	cnt	= NUM;//»®·ÖµÄ·İÊı
+		int	cnt	= NUM;//åˆ’åˆ†çš„ä»½æ•°
 		float x[NUM],y[NUM];
-		float a= 400;//µ¥Î»nm £¬¿ÉÒÔÍ¨¹ıSIZEµ÷Õûµ¥Î»
+		float a= 400;//å•ä½nm ï¼Œå¯ä»¥é€šè¿‡SIZEè°ƒæ•´å•ä½
 						
 		
 		for ( i = 0; i < cnt ; i++ )
 		{
-			float tho = a*(1-sin(2*PI*i/NUM));//¼«×ø±êÔ²ĞÄ·½³Ì
+			float tho = a*(1-sin(2*PI*i/NUM));//æåæ ‡åœ†å¿ƒæ–¹ç¨‹
 			
-			x[i]= tho*cos(2*PI*i/NUM);//¼«×ø±ê×ª»»ÎªÆÕÍ¨×ø±ê
+			x[i]= tho*cos(2*PI*i/NUM);//æåæ ‡è½¬æ¢ä¸ºæ™®é€šåæ ‡
 			y[i]= tho*sin(2*PI*i/NUM);
 		}
 		
@@ -80,7 +80,7 @@ module textGet
 		points = (LPoint *) malloc( (cnt) * sizeof(LPoint) );//get arm
 		for ( i = 0; i < cnt ; i++ )
 		{
-			points[i] = LPoint_Set( x[i] * SIZE + offsetX, y[i] * SIZE + offsetY );//Ledit»­µã
+			points[i] = LPoint_Set( x[i] * SIZE + offsetX, y[i] * SIZE + offsetY );//Leditç”»ç‚¹
 		}
 		LPolygon_New( Cell, Layer, points, cnt  );
 		free( points );
@@ -88,16 +88,16 @@ module textGet
 	}
 	
 
-	void  drawRowland()
+	void  drawRowland() //å¿«æ·é”®æ‰§è¡Œçš„å‡½æ•°
 	{
 		/*
-		 * »æÍ¼º¯ÊıµÄÈë²Î±ØĞëÖ¸¶¨cell¡¢ÎÄ¼şºÍÍ¼²ã£¬ĞèÏÈ»ñÈ¡
-		 * »ñÈ¡µ±Ç°cellºÍÎÄ¼ş
+		 * ç»˜å›¾å‡½æ•°çš„å…¥å‚å¿…é¡»æŒ‡å®šcellã€æ–‡ä»¶å’Œå›¾å±‚ï¼Œéœ€å…ˆè·å–
+		 * è·å–å½“å‰cellå’Œæ–‡ä»¶
 		 */
 		LCell	Cell_Now	= LCell_GetVisible();
 		LFile	File_Now	= LCell_GetFile( Cell_Now );
 
-		/* »ñÈ¡µ±Ç°Í¼²ã */
+		/* è·å–å½“å‰å›¾å±‚ */
 		LLayer Layer_Poly = LLayer_Find( File_Now, "Poly" );
 		if ( !Layer_Poly )
 		{
@@ -123,7 +123,7 @@ module textGet
 		double	offsetY = 0;
 		
 
-		//ÍÖÔ²
+		//æ¤­åœ†
 		drawC_1( Cell_Now, Layer_Poly, offsetX, offsetY );
 		
 		//heart
@@ -135,7 +135,7 @@ module textGet
 
 	void  drawRowland_main( void )
 	{
-		LMacro_BindToHotKey( KEY_F1, "drawRowland", "drawRowland" );
+		LMacro_BindToHotKey( KEY_F1, "drawRowland", "drawRowland" ); //è®¾ç½®å¿«æ·é”®
 	}
 } /* end of module textGet */
 
